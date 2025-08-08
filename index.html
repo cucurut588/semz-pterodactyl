@@ -1,211 +1,342 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Private Pterodactyl - SEMZ</title>
+    <title>NGL Spammer Pro</title>
     <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ff0033;
+            --accent: #9c27b0;
+            --text: #f0f0f0;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a2e;
-            color: #e6e6e6;
+            background-color: var(--primary);
+            color: var(--text);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(156, 39, 176, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 51, 0.1) 0%, transparent 20%);
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
         }
         
-        header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 2px solid #4cc9f0;
-            margin-bottom: 30px;
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(156, 39, 176, 0.1) 50%,
+                transparent 100%
+            );
+            transform: rotate(45deg);
+            animation: shine 5s infinite;
+            z-index: -1;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
         }
         
         h1 {
-            color: #4cc9f0;
-            margin: 0;
-        }
-        
-        .price-list {
-            background-color: #16213e;
-            border-radius: 8px;
-            padding: 20px;
+            color: var(--secondary);
+            text-align: center;
             margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(255, 0, 51, 0.5);
         }
         
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #4cc9f033;
+        .form-group {
+            margin-bottom: 20px;
         }
         
-        .price-item:last-child {
-            border-bottom: none;
-        }
-        
-        .price-name {
-            font-weight: bold;
-            color: #f72585;
-        }
-        
-        .price-value {
-            color: #4cc9f0;
-        }
-        
-        .features {
-            background-color: #16213e;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .features h2 {
-            color: #f72585;
-            margin-top: 0;
-        }
-        
-        .features ul {
-            padding-left: 20px;
-        }
-        
-        .features li {
+        label {
+            display: block;
             margin-bottom: 8px;
-        }
-        
-        .cta {
-            text-align: center;
-            background-color: #16213e;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .cta h2 {
-            color: #4cc9f0;
-            margin-top: 0;
-        }
-        
-        .whatsapp-btn {
-            display: inline-block;
-            background-color: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 50px;
+            color: var(--accent);
             font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #333;
+            background-color: #222;
+            color: var(--text);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.3);
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-top: 10px;
-            transition: all 0.3s ease;
         }
         
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
+        button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 0, 51, 0.4);
         }
         
-        footer {
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(255, 0, 51, 0.1);
+            border-left: 4px solid var(--secondary);
+            display: none;
+        }
+        
+        .loading {
+            display: none;
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #888;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--secondary);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .counter {
+            text-align: center;
+            margin-top: 10px;
             font-size: 14px;
+            color: var(--accent);
+        }
+        
+        .log {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .success {
+            color: #4CAF50;
+        }
+        
+        .error {
+            color: #F44336;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>KEBUTUHAN PANEL PRIVATE SEMZ</h1>
-        </header>
+        <h1>NGL SPAMMER PRO</h1>
         
-        <div class="price-list">
-            <div class="price-item">
-                <span class="price-name">1GB</span>
-                <span class="price-value">500</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">2GB</span>
-                <span class="price-value">1000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">3GB</span>
-                <span class="price-value">1500</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">4GB</span>
-                <span class="price-value">2000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">5GB</span>
-                <span class="price-value">2500</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">6GB</span>
-                <span class="price-value">3000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">7GB</span>
-                <span class="price-value">3500</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">8GB</span>
-                <span class="price-value">4000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">9GB</span>
-                <span class="price-value">4500</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">UNLI</span>
-                <span class="price-value">5000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">Reseller panel</span>
-                <span class="price-value">6000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">ADMIN PANEL</span>
-                <span class="price-value">7000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">PT PANEL</span>
-                <span class="price-value">9000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">OWNER PANEL</span>
-                <span class="price-value">10000</span>
-            </div>
-            <div class="price-item">
-                <span class="price-name">TANGAN KANAN PANEL</span>
-                <span class="price-value">15000</span>
-            </div>
+        <div class="form-group">
+            <label for="username">Username NGL:</label>
+            <input type="text" id="username" placeholder="Masukkan username NGL (tanpa @)" required>
         </div>
         
-        <div class="features">
-            <h2>KELEBIHAN DARI PANEL TERSEBUT</h2>
-            <ul>
-                <li>ANTI RUSUH</li>
-                <li>SPEK VPS R32C8</li>
-            </ul>
+        <div class="form-group">
+            <label for="message">Pesan:</label>
+            <textarea id="message" rows="4" placeholder="Masukkan pesan yang ingin dikirim" required></textarea>
         </div>
         
-        <div class="cta">
-            <h2>MINAT???</h2>
-            <a href="https://wa.me/+6285947074003?text=*ORDER+PANEL+DONG*" class="whatsapp-btn">Hubungi via WhatsApp</a>
+        <div class="form-group">
+            <label for="count">Jumlah Spam:</label>
+            <input type="number" id="count" min="1" max="1000" value="10" required>
         </div>
         
-        <footer>
-            &copy; 2000 Panel Private SEMZ. All rights reserved.
-        </footer>
+        <div class="form-group">
+            <label for="delay">Delay (ms):</label>
+            <input type="number" id="delay" min="0" max="10000" value="1000" required>
+        </div>
+        
+        <button id="spamBtn">MULAI SPAM</button>
+        <button id="stopBtn" style="background: #333; margin-top: 10px;">STOP</button>
+        
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Mengirim spam...</p>
+            <div class="counter" id="counter">0/10</div>
+        </div>
+        
+        <div class="result" id="result">
+            <p>Spam berhasil dikirim!</p>
+        </div>
+        
+        <div class="log" id="log"></div>
     </div>
+
+    <script>
+        let isSpamming = false;
+        let stopRequested = false;
+        
+        document.getElementById('spamBtn').addEventListener('click', startSpamming);
+        document.getElementById('stopBtn').addEventListener('click', stopSpamming);
+        
+        function addLog(message, type = 'info') {
+            const logElement = document.getElementById('log');
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logElement.appendChild(logEntry);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        async function sendMessage(username, message) {
+            const url = `https://ngl.link/api/submit`;
+            const deviceId = generateDeviceId();
+            
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('question', message);
+            formData.append('deviceId', deviceId);
+            formData.append('gameSlug', '');
+            formData.append('referrer', '');
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': '*/*',
+                        'Origin': 'https://ngl.link',
+                        'Referer': `https://ngl.link/${username}`,
+                    },
+                    mode: 'no-cors'
+                });
+                
+                // We can't read the response in no-cors mode, but we can assume it worked
+                return true;
+            } catch (error) {
+                addLog(`Error: ${error.message}`, 'error');
+                return false;
+            }
+        }
+        
+        function generateDeviceId() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        
+        async function startSpamming() {
+            if (isSpamming) return;
+            
+            const username = document.getElementById('username').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const count = parseInt(document.getElementById('count').value);
+            const delay = parseInt(document.getElementById('delay').value);
+            
+            if (!username || !message || isNaN(count) || count < 1) {
+                addLog('Harap isi semua field dengan benar!', 'error');
+                return;
+            }
+            
+            isSpamming = true;
+            stopRequested = false;
+            document.querySelector('.loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('log').innerHTML = '';
+            
+            addLog(`Memulai spam ke ${username} sebanyak ${count} kali...`);
+            
+            let successCount = 0;
+            const counterElement = document.getElementById('counter');
+            
+            for (let i = 0; i < count; i++) {
+                if (stopRequested) {
+                    addLog('Spamming dihentikan oleh pengguna');
+                    break;
+                }
+                
+                counterElement.textContent = `${i + 1}/${count}`;
+                
+                const success = await sendMessage(username, message);
+                if (success) {
+                    successCount++;
+                    addLog(`[${i + 1}] Pesan terkirim: "${message}"`, 'success');
+                } else {
+                    addLog(`[${i + 1}] Gagal mengirim pesan`, 'error');
+                }
+                
+                if (i < count - 1 && delay > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            
+            isSpamming = false;
+            document.querySelector('.loading').style.display = 'none';
+            addLog(`Selesai! ${successCount} dari ${count} pesan berhasil dikirim.`);
+        }
+        
+        function stopSpamming() {
+            if (isSpamming) {
+                stopRequested = true;
+                addLog('Meminta penghentian spam...');
+            }
+        }
+    </script>
 </body>
 </html>
